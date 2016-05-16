@@ -4,7 +4,7 @@ from datetime import date
 import calendar
 # from django.http import HttpResponse
 from .models import Event, Update
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 
@@ -24,11 +24,11 @@ def update_detail(request):
 
 
 # TODO: WARNING! TEST! event_detail and redirect_to_event MUST be remaked!
-def event_detail(request):
-    event_date = request.event_date.split('/')
-    event_date = datetime.date(year=event_date[2], month=event_date[1], day=event_date[0])
+def event_detail(request, event_date):
+    r_events = str(event_date)
     events = Event.objects.filter(date=event_date)
     context = {
+        'r_events': r_events,
         'events': events
     }
     return render(request, 'upd_calendar/event.html', context)

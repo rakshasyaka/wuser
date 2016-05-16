@@ -24,7 +24,12 @@
             <tr>
             {% for day in line %}
                 {% if day in ev_dates %}
-                    <td class="shed_event"><a href="{% url 'event_detail' day.day %}">{{day.day}}</a></td>
+                    {% if day.month != today.month %}
+                    <!--<a href="{% url 'firstapp:detail' question.id %}">{{ question.question }}</a> (EXAMPLE)-->
+                    <td class="no_cur_month ev_in_cal"><a href="{% url 'upd_calendar:event_detail' day %}">{{ day.day }}</a></td>
+                    {% else %}
+                    <td class="cur_month ev_in_cal"><a href="{% url 'upd_calendar:event_detail' day %}">{{ day.day }}</a></td>
+                    {% endif %}
                 {% else %}
                     {% if day.month != today.month %}
                     <td class="no_cur_month">{{ day.day }}</td>

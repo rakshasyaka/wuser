@@ -1,5 +1,15 @@
-body{background: #ddd;}
+body{background: #ecdec1;}
 div{
     border: #333 solid 2px;
     border-radius: 15px;
+    padding: 10px;
+    text-align: center;
+    width: 50%;
+    margin-left: 25%;
+}
+.head_date{
+    font-size: 1.5em;
+    font-weight: bolder;
+    color: #1E2971;
+    text-align: center;
 }

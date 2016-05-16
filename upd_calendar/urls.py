@@ -12,7 +12,7 @@ urlpatterns = [
     ),
     # ex: /updcalendar/event/1
     url(
-        r'^event/(?P<event_date>)/$',
+        r'^event/(?P<event_date>\d+[-]\d+[-]\d+)',
         views.event_detail, name='event_detail'
     ),
 ]
