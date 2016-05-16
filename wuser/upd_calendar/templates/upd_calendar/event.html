@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Event Extend</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/event.css' %}">
+    <link href="{% static 'css/favicon-32x32_1.png' %}" rel="icon"/>
+</head>
+<body>
+    {% for event in events %}
+        {% if event.area = 't' %}
+        <div> Тестовое обновление {{ event.date }}.</div>
+        {% else %}
+        <div> Продуктивное обновление {{ event.date }} </div>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Update-Events Calendar</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/calendar.css' %}">
+    <link href="{% static 'css/favicon-32x32_1.png' %}" rel="icon"/>
+</head>
+<body>
+    <div class="calendar">
+        <h1>{{ today_m }} {{today.year}}</h1>
+        <table>
+        <tr>
+            <th>Понедельник</th>
+            <th>Вторник</th>
+            <th>Среда</th>
+            <th>Четверг</th>
+            <th>Пятница</th>
+            <th class="holly">Суббота</th>
+            <th class="holly">Воскресенье</th>
+        </tr>
+        {% for line in month_cal %}
+            <tr>
+            {% for day in line %}
+                {% if day in ev_dates %}
+                    <td class="shed_event"><a href="{% url 'event_detail' day.day %}">{{day.day}}</a></td>
+                {% else %}
+                    {% if day.month != today.month %}
+                    <td class="no_cur_month">{{ day.day }}</td>
+                    {% else %}
+                    <td class="cur_month">{{ day.day }}</td>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+    <div class="events">
+        <h2>Текущие события</h2>
+        {% if show_events %}
+        <ul>
+            {% for event in show_events %}
+            {% if event.run == 'n' %}
+                <li class="not_run">{{ event.date }} {{ event.area }}</li>
+            {% else %}
+                <li class="ok_run">{{ event.date }} {{ event.area }}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p> На данный момент нет запланированных событий. Говорить не о чем.</p>
+        {% endif %}
+    </div>
+    <div class="descriptions">
+        <p>Тут будет размещена какая то дополнительная информация. Возможно краткие описания причин не запуска событий</p>
+        <p>Возможно цветовая легенда творящегося на экране. Например <span class="not_run">такая</span> запись означает, что событие не состоялось в срок. А  <span class="ok_run">такая</span>, что событие, видимо, произошло.</p>
+    </div>
+</body>
+</html>
