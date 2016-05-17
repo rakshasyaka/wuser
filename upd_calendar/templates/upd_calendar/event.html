@@ -8,6 +8,7 @@
     <link href="{% static 'css/favicon-32x32_1.png' %}" rel="icon"/>
 </head>
 <body>
+    <a class="href_button" href="{% url 'upd_calendar:draw_calendar' %}">Календарь</a>
     <p class="head_date">{{ r_events }}</p>
     {% for event in events %}
         {% if event.area = 't' %}
@@ -16,5 +17,6 @@
         <div> Продуктивное обновление {{ event.date }}</div>
         {% endif %}
     {% endfor %}
+    <a class="href_button" href="{% url 'upd_calendar:draw_calendar' %}">Календарь</a>
 </body>
 </html>

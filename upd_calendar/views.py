@@ -26,7 +26,13 @@ def update_detail(request):
 # TODO: WARNING! TEST! event_detail and redirect_to_event MUST be remaked!
 def event_detail(request, event_date):
     r_events = str(event_date)
-    events = Event.objects.filter(date=event_date)
+    # events = Event.objects.filter(date=event_date)
+    q_events = get_object_or_404(Event, date=event_date)
+    if q_events is not list:
+        events = []
+        events.append(q_events)
+    else:
+        events = q_events
     context = {
         'r_events': r_events,
         'events': events
