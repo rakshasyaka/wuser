@@ -7,6 +7,14 @@ from .models import Event, Update
 from django.shortcuts import get_object_or_404, render
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
+
+
+# пригодиццо
+def check_access_rights(request):
+    if request.user.have_access or request.user.is_staff:
+        return request
+    raise PermissionDenied
 
 
 # in this we are take all events from model where month eq current month
