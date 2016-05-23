@@ -15,6 +15,15 @@ class Event(models.Model):
             return 'Production Deploy: {:%Y-%m-%d %H:%M:%S}'.format(self.date)
 
 
+class Rule(models.Model):
+    name = models.CharField(max_length=250)
+    date = models.DateField('complteions date')
+    state = models.CharField(max_length=50, default='success')
+
+    def __str__(self):
+        return '{} in {}'.format(self.name, self.date)
+
+
 class Update(models.Model):
     CLASSIFICATION = (
         ('s', 'security'),
@@ -34,8 +43,8 @@ class Update(models.Model):
     classification = models.CharField(
         max_length=1, choices=CLASSIFICATION, default='n')
     product = models.CharField(max_length=4, choices=PRODUCT)
-    test_deploy = models.ManyToManyField(
-        Event, verbose_name='test deploy', blank=True)
+    belongs_rule = models.ManyToManyField(
+       Rule, verbose_name='belongs to rule', blank=True)
 
     def __str__(self):
         return self.kb_name
